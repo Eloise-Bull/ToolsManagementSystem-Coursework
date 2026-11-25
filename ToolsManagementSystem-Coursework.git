@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyM7QC6EIRrLs81GjvwL/dD2",
+      "authorship_tag": "ABX9TyMu5cAQgB3DJdAWsWsUaX9X",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -215,15 +215,200 @@
       ]
     },
     {
+      "cell_type": "markdown",
+      "source": [
+        "Building the GUI"
+      ],
+      "metadata": {
+        "id": "RMPXNyei-cEt"
+      }
+    },
+    {
       "cell_type": "code",
+      "source": [
+        "# GUI with ipywidgets\n",
+        "\n",
+        "import ipywidgets as widgets\n",
+        "from IPython.display import display\n",
+        "\n",
+        "name = widgets.Text(\n",
+        "    description = 'Name:',\n",
+        "    placeholder = 'Enter your name'\n",
+        ")\n",
+        "\n",
+        "button = widgets.Button(description = 'Submit')\n",
+        "output = widgets.Output\n",
+        "\n",
+        "def on_button_clicked(b):\n",
+        "  with output:\n",
+        "    output.clear_output()\n",
+        "    print(f\"Hello {name.value}!\")\n",
+        "\n",
+        "button.on_click(on_button_clicked)\n",
+        "display(name, button, output)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 250,
+          "referenced_widgets": [
+            "f400631bdb874f1f9b74991037735ef2",
+            "fc1fa5863584476299b54bf8c8242aa9",
+            "012a5c0868f94aa1a1af44d69165203e",
+            "5dd7bfad42c7474f86a78ff15cdda86c",
+            "6ea236dee80945abba3bc67eee690e2c",
+            "5689742a41304f36b5a4bff7ebf801fa"
+          ]
+        },
+        "collapsed": true,
+        "id": "zJ5Rlr2S40Z5",
+        "outputId": "70ca962c-7dbc-457b-b7d7-2792814c002e"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "Text(value='', description='Name:', placeholder='Enter your name')"
+            ],
+            "application/vnd.jupyter.widget-view+json": {
+              "version_major": 2,
+              "version_minor": 0,
+              "model_id": "f400631bdb874f1f9b74991037735ef2"
+            }
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "Button(description='Submit', style=ButtonStyle())"
+            ],
+            "application/vnd.jupyter.widget-view+json": {
+              "version_major": 2,
+              "version_minor": 0,
+              "model_id": "5dd7bfad42c7474f86a78ff15cdda86c"
+            }
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "ipywidgets.widgets.widget_output.Output"
+            ],
+            "text/html": [
+              "<div style=\"max-width:800px; border: 1px solid var(--colab-border-color);\"><style>\n",
+              "      pre.function-repr-contents {\n",
+              "        overflow-x: auto;\n",
+              "        padding: 8px 12px;\n",
+              "        max-height: 500px;\n",
+              "      }\n",
+              "\n",
+              "      pre.function-repr-contents.function-repr-contents-collapsed {\n",
+              "        cursor: pointer;\n",
+              "        max-height: 100px;\n",
+              "      }\n",
+              "    </style>\n",
+              "    <pre style=\"white-space: initial; background:\n",
+              "         var(--colab-secondary-surface-color); padding: 8px 12px;\n",
+              "         border-bottom: 1px solid var(--colab-border-color);\"><b>ipywidgets.widgets.widget_output.Output</b><br/>def __init__(**kwargs)</pre><pre class=\"function-repr-contents function-repr-contents-collapsed\" style=\"\"><a class=\"filepath\" style=\"display:none\" href=\"#\">/usr/local/lib/python3.13/dist-packages/ipywidgets/widgets/widget_output.py</a>Widget used as a context manager to display output.\n",
+              "\n",
+              "This widget can capture and display stdout, stderr, and rich output.  To use\n",
+              "it, create an instance of it and display it.\n",
+              "\n",
+              "You can then use the widget as a context manager: any output produced while in the\n",
+              "context will be captured and displayed in the widget instead of the standard output\n",
+              "area.\n",
+              "\n",
+              "You can also use the .capture() method to decorate a function or a method. Any output \n",
+              "produced by the function will then go to the output widget. This is useful for\n",
+              "debugging widget callbacks, for example.\n",
+              "\n",
+              "Example::\n",
+              "    import ipywidgets as widgets\n",
+              "    from IPython.display import display\n",
+              "    out = widgets.Output()\n",
+              "    display(out)\n",
+              "\n",
+              "    print(&#x27;prints to output area&#x27;)\n",
+              "\n",
+              "    with out:\n",
+              "        print(&#x27;prints to output widget&#x27;)\n",
+              "\n",
+              "    @out.capture()\n",
+              "    def func():\n",
+              "        print(&#x27;prints to output widget&#x27;)</pre>\n",
+              "      <script>\n",
+              "      if (google.colab.kernel.accessAllowed && google.colab.files && google.colab.files.view) {\n",
+              "        for (const element of document.querySelectorAll('.filepath')) {\n",
+              "          element.style.display = 'block'\n",
+              "          element.onclick = (event) => {\n",
+              "            event.preventDefault();\n",
+              "            event.stopPropagation();\n",
+              "            google.colab.files.view(element.textContent, 23);\n",
+              "          };\n",
+              "        }\n",
+              "      }\n",
+              "      for (const element of document.querySelectorAll('.function-repr-contents')) {\n",
+              "        element.onclick = (event) => {\n",
+              "          event.preventDefault();\n",
+              "          event.stopPropagation();\n",
+              "          element.classList.toggle('function-repr-contents-collapsed');\n",
+              "        };\n",
+              "      }\n",
+              "      </script>\n",
+              "      </div>"
+            ]
+          },
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "The backend"
+      ],
+      "metadata": {
+        "id": "naANPQls-iih"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#checking customer has a subscription\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "lVR23RC7_LZ8"
+      },
       "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# New section"
+      ],
+      "metadata": {
+        "id": "Agm1IJIPAJq7"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 5,
       "metadata": {
         "id": "pDGHfSQzFh72",
         "colab": {
           "base_uri": "https://localhost:8080/",
-          "height": 108
+          "height": 162
         },
-        "outputId": "ff969992-0dde-438a-b467-2436c8b32980"
+        "outputId": "1f77539e-ed10-4ca0-86e9-9ea8d3beaf50",
+        "collapsed": true
       },
       "outputs": [
         {
@@ -234,9 +419,9 @@
             ],
             "text/html": [
               "\n",
-              "     <input type=\"file\" id=\"files-b5816918-d551-4b54-b553-9d919ef11cb0\" name=\"files[]\" multiple disabled\n",
+              "     <input type=\"file\" id=\"files-c6090b3a-9ffd-49dd-be70-a60f86f17dc9\" name=\"files[]\" multiple disabled\n",
               "        style=\"border:none\" />\n",
-              "     <output id=\"result-b5816918-d551-4b54-b553-9d919ef11cb0\">\n",
+              "     <output id=\"result-c6090b3a-9ffd-49dd-be70-a60f86f17dc9\">\n",
               "      Upload widget is only available when the cell has been executed in the\n",
               "      current browser session. Please rerun this cell to enable.\n",
               "      </output>\n",
@@ -424,158 +609,14 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "Saving feedbackManager.pyc to feedbackManager (1).pyc\n",
-            "Saving subscriptionManager.pyc to subscriptionManager (1).pyc\n"
+            "Saving feedbackManager.pyc to feedbackManager (2).pyc\n",
+            "Saving subscriptionManager.pyc to subscriptionManager (2).pyc\n"
           ]
         }
       ],
       "source": [
         "from google.colab import files\n",
         "uploaded = files.upload()"
-      ]
-    },
-    {
-      "cell_type": "code",
-      "source": [
-        "# GUI with ipywidgets\n",
-        "\n",
-        "import ipywidgets as widgets\n",
-        "from IPython.display import display\n",
-        "\n",
-        "name = widgets.Text(\n",
-        "    description = 'Name:',\n",
-        "    placeholder = 'Enter your name'\n",
-        ")\n",
-        "\n",
-        "button = widgets.Button(description = 'Submit')\n",
-        "output = widgets.Output\n",
-        "\n",
-        "def on_button_clicked(b):\n",
-        "  with output:\n",
-        "    output.clear_output()\n",
-        "    print(f\"Hello {name.value}!\")\n",
-        "\n",
-        "button.on_click(on_button_clicked)\n",
-        "display(name, button, output)\n"
-      ],
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/",
-          "height": 250,
-          "referenced_widgets": [
-            "f400631bdb874f1f9b74991037735ef2",
-            "fc1fa5863584476299b54bf8c8242aa9",
-            "012a5c0868f94aa1a1af44d69165203e",
-            "5dd7bfad42c7474f86a78ff15cdda86c",
-            "6ea236dee80945abba3bc67eee690e2c",
-            "5689742a41304f36b5a4bff7ebf801fa"
-          ]
-        },
-        "id": "zJ5Rlr2S40Z5",
-        "outputId": "70ca962c-7dbc-457b-b7d7-2792814c002e"
-      },
-      "execution_count": 3,
-      "outputs": [
-        {
-          "output_type": "display_data",
-          "data": {
-            "text/plain": [
-              "Text(value='', description='Name:', placeholder='Enter your name')"
-            ],
-            "application/vnd.jupyter.widget-view+json": {
-              "version_major": 2,
-              "version_minor": 0,
-              "model_id": "f400631bdb874f1f9b74991037735ef2"
-            }
-          },
-          "metadata": {}
-        },
-        {
-          "output_type": "display_data",
-          "data": {
-            "text/plain": [
-              "Button(description='Submit', style=ButtonStyle())"
-            ],
-            "application/vnd.jupyter.widget-view+json": {
-              "version_major": 2,
-              "version_minor": 0,
-              "model_id": "5dd7bfad42c7474f86a78ff15cdda86c"
-            }
-          },
-          "metadata": {}
-        },
-        {
-          "output_type": "display_data",
-          "data": {
-            "text/plain": [
-              "ipywidgets.widgets.widget_output.Output"
-            ],
-            "text/html": [
-              "<div style=\"max-width:800px; border: 1px solid var(--colab-border-color);\"><style>\n",
-              "      pre.function-repr-contents {\n",
-              "        overflow-x: auto;\n",
-              "        padding: 8px 12px;\n",
-              "        max-height: 500px;\n",
-              "      }\n",
-              "\n",
-              "      pre.function-repr-contents.function-repr-contents-collapsed {\n",
-              "        cursor: pointer;\n",
-              "        max-height: 100px;\n",
-              "      }\n",
-              "    </style>\n",
-              "    <pre style=\"white-space: initial; background:\n",
-              "         var(--colab-secondary-surface-color); padding: 8px 12px;\n",
-              "         border-bottom: 1px solid var(--colab-border-color);\"><b>ipywidgets.widgets.widget_output.Output</b><br/>def __init__(**kwargs)</pre><pre class=\"function-repr-contents function-repr-contents-collapsed\" style=\"\"><a class=\"filepath\" style=\"display:none\" href=\"#\">/usr/local/lib/python3.13/dist-packages/ipywidgets/widgets/widget_output.py</a>Widget used as a context manager to display output.\n",
-              "\n",
-              "This widget can capture and display stdout, stderr, and rich output.  To use\n",
-              "it, create an instance of it and display it.\n",
-              "\n",
-              "You can then use the widget as a context manager: any output produced while in the\n",
-              "context will be captured and displayed in the widget instead of the standard output\n",
-              "area.\n",
-              "\n",
-              "You can also use the .capture() method to decorate a function or a method. Any output \n",
-              "produced by the function will then go to the output widget. This is useful for\n",
-              "debugging widget callbacks, for example.\n",
-              "\n",
-              "Example::\n",
-              "    import ipywidgets as widgets\n",
-              "    from IPython.display import display\n",
-              "    out = widgets.Output()\n",
-              "    display(out)\n",
-              "\n",
-              "    print(&#x27;prints to output area&#x27;)\n",
-              "\n",
-              "    with out:\n",
-              "        print(&#x27;prints to output widget&#x27;)\n",
-              "\n",
-              "    @out.capture()\n",
-              "    def func():\n",
-              "        print(&#x27;prints to output widget&#x27;)</pre>\n",
-              "      <script>\n",
-              "      if (google.colab.kernel.accessAllowed && google.colab.files && google.colab.files.view) {\n",
-              "        for (const element of document.querySelectorAll('.filepath')) {\n",
-              "          element.style.display = 'block'\n",
-              "          element.onclick = (event) => {\n",
-              "            event.preventDefault();\n",
-              "            event.stopPropagation();\n",
-              "            google.colab.files.view(element.textContent, 23);\n",
-              "          };\n",
-              "        }\n",
-              "      }\n",
-              "      for (const element of document.querySelectorAll('.function-repr-contents')) {\n",
-              "        element.onclick = (event) => {\n",
-              "          event.preventDefault();\n",
-              "          event.stopPropagation();\n",
-              "          element.classList.toggle('function-repr-contents-collapsed');\n",
-              "        };\n",
-              "      }\n",
-              "      </script>\n",
-              "      </div>"
-            ]
-          },
-          "metadata": {}
-        }
       ]
     },
     {
